@@ -21,12 +21,13 @@ class Item < ApplicationRecord
     validates :price
   end
 
-  validates :category_id, :condition_id, :shipping_fee_burden_id, :prefecture_id, :shipping_day_id, numericality: { other_than: 1, message: "を選択してください" }
+  validates :category_id, :condition_id, :shipping_fee_burden_id, :prefecture_id, :shipping_day_id,
+            numericality: { other_than: 1, message: 'を選択してください' }
 
-  validates :price, numericality: { 
+  validates :price, numericality: {
     only_integer: true,
     greater_than_or_equal_to: 300,
     less_than_or_equal_to: 9_999_999,
-    message: "は¥300〜¥9,999,999の範囲で入力してください"
+    message: 'は¥300〜¥9,999,999の範囲で入力してください'
   }
 end
