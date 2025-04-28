@@ -36,12 +36,9 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    if current_user.id == @item.user_id
-      @item.destroy
-      redirect_to root_path
-    else
-      redirect_to root_path
-    end
+    current_user.id == @item.user_id
+    @item.destroy
+    redirect_to root_path
   end
 
   private
@@ -60,7 +57,6 @@ class ItemsController < ApplicationController
 
   def move_to_index
     return if user_signed_in? && current_user.id == @item.user_id
-
     redirect_to root_path
   end
 end
