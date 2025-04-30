@@ -57,12 +57,13 @@ class ItemsController < ApplicationController
 
   def move_to_index
     return if user_signed_in? && current_user.id == @item.user_id
+
     redirect_to root_path
   end
 
   def redirect_if_sold_out
-    if @item.order.present?
-      redirect_to root_path
-    end
+    return unless @item.order.present?
+
+    redirect_to root_path
   end
 end

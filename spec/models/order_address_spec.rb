@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-
 RSpec.describe OrderAddress, type: :model do
   before do
     @user = FactoryBot.create(:user)
@@ -30,13 +29,13 @@ RSpec.describe OrderAddress, type: :model do
     it '郵便番号が「3桁-4桁」でないと保存できない' do
       @order_address.postal_code = '1234567'
       @order_address.valid?
-      expect(@order_address.errors.full_messages).to include("Postal code は「3桁ハイフン4桁」の形式で入力してください")
+      expect(@order_address.errors.full_messages).to include('Postal code は「3桁ハイフン4桁」の形式で入力してください')
     end
 
     it '都道府県を選択していないと保存できない' do
       @order_address.prefecture_id = 1
       @order_address.valid?
-      expect(@order_address.errors.full_messages).to include("Prefecture を選択してください")
+      expect(@order_address.errors.full_messages).to include('Prefecture を選択してください')
     end
 
     it '市区町村が空では保存できない' do
@@ -60,19 +59,19 @@ RSpec.describe OrderAddress, type: :model do
     it '電話番号が9桁以下では保存できない' do
       @order_address.phone_number = '090123456'
       @order_address.valid?
-      expect(@order_address.errors.full_messages).to include("Phone number は10〜11桁の半角数字で入力してください")
+      expect(@order_address.errors.full_messages).to include('Phone number は10〜11桁の半角数字で入力してください')
     end
 
     it '電話番号が12桁以上では保存できない' do
       @order_address.phone_number = '090123456789'
       @order_address.valid?
-      expect(@order_address.errors.full_messages).to include("Phone number は10〜11桁の半角数字で入力してください")
+      expect(@order_address.errors.full_messages).to include('Phone number は10〜11桁の半角数字で入力してください')
     end
 
     it '電話番号がハイフンを含むと保存できない' do
       @order_address.phone_number = '090-1234-5678'
       @order_address.valid?
-      expect(@order_address.errors.full_messages).to include("Phone number は10〜11桁の半角数字で入力してください")
+      expect(@order_address.errors.full_messages).to include('Phone number は10〜11桁の半角数字で入力してください')
     end
 
     it 'tokenが空では登録できない' do
