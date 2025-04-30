@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item
+  before_action :redirect_if_invalid_order
 
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
@@ -30,6 +31,13 @@ class OrdersController < ApplicationController
   def set_item
     @item = Item.find(params[:item_id])
   end
+
+  def redirect_if_invalid_order
+    if @item.order.present? || current_user == @item.user
+      redirect_to root_path
+    end
+  end
+
 
   def pay_item
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
